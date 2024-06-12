@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "veryfasttree"
+version = "4.0.3+1"
+description = "An OpenMP Implementation for Python"
+license = "LGPL-3.0-only"
+authors = [
+    "Cesar Pomar <cesaralfredo.pineiro@usc.es>",
+    "Juan C. Pichel <juancarlos.pichel@usc.es>"
+]
+readme = "README.md"
+repository = "https://github.com/citiususc/veryfasttree"
+keywords = ["Phylogenetics", "Sequence analysis"]
+build = "c_build.py"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+py-cpuinfo = "^9.0"
+
+
+[build-system]
+requires = ["poetry-core", "requests", "cmake"]
+build-backend = "poetry.core.masonry.api"
