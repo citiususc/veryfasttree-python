@@ -9,7 +9,7 @@ VERSION = '4.0.3'
 
 
 def cmake_run(*args):
-    subprocess.check_call([os.path.join(cmake.CMAKE_BIN_DIR, 'cmake'), *args])
+    subprocess.check_call([os.path.join(cmake.CMAKE_BIN_DIR, 'cmake'), *args], env=os.environ)
 
 
 if os.path.exists('c'):
@@ -36,9 +36,9 @@ if platform.system() == 'Darwin':
             os.environ['CXXFLAGS'] = f'-I{omp_path}/include'
 
         if 'LDFLAGS' in os.environ:
-            os.environ['LDFLAGS'] += f' -I{omp_path}/lib/libomp.a'
+            os.environ['LDFLAGS'] += f' {omp_path}/lib/libomp.a'
         else:
-            os.environ['LDFLAGS'] = f'-I{omp_path}/lib/libomp.a'
+            os.environ['LDFLAGS'] = f'{omp_path}/lib/libomp.a'
 
 for option, simb in [('USE_SEE2', 'sse2')] + ([('USE_AVX2', 'avx2'), ('USE_AVX512', 'avx512f')] if is_x86_64 else []):
     cmake_run('-DUSE_NATIVE=OFF', f'-D{option}=ON', '-B', 'c/build' + simb, '-S', f'c/veryfasttree-{VERSION}')
