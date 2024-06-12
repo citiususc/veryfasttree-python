@@ -28,17 +28,17 @@ if platform.system() == 'Darwin':
         omp_path = os.environ['VFT_OMP']
 
         if omp_path == 'brew':
-            omp_path = subprocess.check_output(['brew', '--prefix', 'libomp']).strip()
+            omp_path = subprocess.check_output(['brew', '--prefix', 'libomp'], text=True).strip()
 
         if 'CXXFLAGS' in os.environ:
-            os.environ['CXXFLAGS'] += f' -I{os.environ[omp_path]}/include'
+            os.environ['CXXFLAGS'] += f' -I{omp_path}/include'
         else:
-            os.environ['CXXFLAGS'] = f'-I{os.environ[omp_path]}/include'
+            os.environ['CXXFLAGS'] = f'-I{omp_path}/include'
 
         if 'LDFLAGS' in os.environ:
-            os.environ['LDFLAGS'] += f' -I{os.environ[omp_path]}/lib/libomp.a'
+            os.environ['LDFLAGS'] += f' -I{omp_path}/lib/libomp.a'
         else:
-            os.environ['LDFLAGS'] = f'-I{os.environ[omp_path]}/lib/libomp.a'
+            os.environ['LDFLAGS'] = f'-I{omp_path}/lib/libomp.a'
 
 for option, simb in [('USE_SEE2', 'sse2')] + ([('USE_AVX2', 'avx2'), ('USE_AVX512', 'avx512f')] if is_x86_64 else []):
     cmake_run('-DUSE_NATIVE=OFF', f'-D{option}=ON', '-B', 'c/build' + simb, '-S', f'c/veryfasttree-{VERSION}')
