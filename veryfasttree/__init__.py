@@ -5,7 +5,7 @@ from importlib.metadata import distribution
 from cpuinfo import get_cpu_info
 import subprocess
 
-__all__ = ['help', 'veryfasttree', 'VFT_BINARY']
+__all__ = ['run', 'help', 'VFT_BINARY']
 __doc__ = 'VeryFastTree: Efficient phylogenetic tree inference for massive taxonomic datasets'
 
 _simd = 'sse2'
@@ -22,11 +22,12 @@ _binary = 'veryfasttree/bin/VeryFastTree-' + _simd + ('.exe' if platform.system(
 VFT_BINARY = distribution('veryfasttree').locate_file(_binary)
 del _binary
 
+
 def help():
-    print(veryfasttree(help=True))
+    print(run(help=True))
 
 
-def veryfasttree(alignment=None, **kwargs):
+def run(alignment=None, **kwargs):
     """
     Common options:
         :param alignment       : input file or string
