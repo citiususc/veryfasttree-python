@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "veryfasttree"
-version = "4.0.3.1"
+version = "4.0.4.1"
 description = "Efficient phylogenetic tree inference for massive taxonomic datasets"
 license = "LGPL-3.0-only"
 authors = [

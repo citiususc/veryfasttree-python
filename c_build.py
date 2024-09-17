@@ -5,7 +5,7 @@ import platform
 import subprocess
 import requests, zipfile, io
 
-VERSION = '4.0.3'
+VERSION = '4.0.4'
 
 
 def cmake_run(*args):
